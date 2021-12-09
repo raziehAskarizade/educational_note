@@ -1,0 +1,35 @@
+{%extends 'mainpage/base.html'%}
+
+{% block title%} Topic {% endblock title%}
+
+
+{% block head %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{% endblock head %}
+
+
+{% block page_header%}
+<h2 style="color: #73898d;">Topics</h2>
+{% endblock page_header%}
+
+{%block content%}
+<ul>
+    {% for topic in topics%}
+    <li>
+        <h3><a href="{% url 'mainpage:entries' topic.id %}">{{topic}} &#124;</a>
+
+            <a href="{% url 'mainpage:edit_topic' topic.id%}" class="btn btn-primary a-btn-slide-text">
+                <i class='fas fa-pencil-alt'></i>
+            </a>
+        </h3>
+    </li>
+    {%empty%}
+    <li>
+        <h3>No Topics have been added yet.</h3>
+    </li>
+    {% endfor %}
+</ul>
+
+<h3><a href="{%url 'mainpage:new_topic' %}">Add new Topic</a></h3>
+{%endblock content%}

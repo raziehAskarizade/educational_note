@@ -1,0 +1,38 @@
+{%extends 'mainpage/base.html'%}
+
+
+{% block title%}entries {% endblock title%}
+
+
+{% block head %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{% endblock head %}
+
+{% block page_header%}
+<h2 style="color: #73898d;">{{topic}}</h2>
+{% endblock page_header%}
+
+
+{%block content%}
+<h4 class="mt-3"><a href="{% url 'mainpage:new_entry' topic.id %}">Add a new Entry</a></h4>
+
+{% for entry in entries%}
+
+<div class="card mb-3 mt-3">
+    <h4 class="card-header">
+        {{entry.date_added|date:"M / j/ Y , G : i"}} &#124;
+        <small><a href="{% url 'mainpage:edit_entry' entry.id%}">
+                <i class='fas fa-pencil-alt' style="color: black;"></i>
+            </a></small>
+    </h4>
+    <div class="card-body">
+        {{entry.text|linebreaks}}
+    </div>
+</div>
+{%empty%}
+<div class="shadow-none p-4 mb-4 bg-light">No Entreis have been added for {{topic}} yet.</div>
+{% endfor %}
+
+
+{%endblock content%}

@@ -1,0 +1,22 @@
+{%extends 'mainpage/base.html'%}
+{% load bootstrap4 %}
+
+{% block title%}edit topic {% endblock title%}
+
+
+{% block page_header%}
+<h2 style="color: #73898d;">Edit your Topic</h2>
+{% endblock page_header%}
+
+
+{%block content%}
+
+<form action="{% url 'mainpage:edit_topic' topic.id%}" method="post" class="form mb-2">
+    {%csrf_token%}
+    {% bootstrap_form form%}
+    {% buttons %}
+    <button type="submit" class="btn btn-lg btn-primary mt-2">Save Changes</button>
+    {% endbuttons %}
+
+</form>
+{%endblock content%}

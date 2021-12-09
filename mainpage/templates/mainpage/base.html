@@ -1,0 +1,61 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , shrink-to-fit=no">
+    <title>{% block title%}{% endblock title%}</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% block head %}
+    {% endblock head %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light bm-4 border">
+        <a class="navbar-brand" href="{%url 'mainpage:homepage'%}">Note Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="toggle navigation">
+            <span class="navbar-toggler-icon">
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'mainpage:topics'%}">Topics</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text">Hello {{user.username}} &#124; </span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:signin' %}">Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:login' %}">Log in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <div class="pb-2 mb-2 border-bottom mt-4">
+            {% block page_header%}
+            {% endblock page_header%}
+        </div>
+        <div>
+            {%block content%}
+            {%endblock content%}
+        </div>
+    </main>
+</body>
+
+</html>

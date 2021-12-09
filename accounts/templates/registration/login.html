@@ -1,0 +1,38 @@
+{%extends 'mainpage/base.html'%}
+{% load bootstrap4 %}
+
+{% block title%} login {% endblock title%}
+
+{% block page_header%}
+<h2 style="color: #88a6ab">Log in to your account.</h2>
+{% endblock page_header%}
+
+{%block content%}
+<form action="{% url 'accounts:login' %}" method="post" class="form">
+    {%csrf_token%}
+
+    {% bootstrap_form form %}
+
+    {% buttons %}
+
+    <button type="submit" class="btn btn-lg btn-primary">Log in</button>
+
+    {% endbuttons %}
+
+    <input type="hidden" name="next" value="{% url 'mainpage:homepage' %}">
+
+    {%if request.GET.next%}
+    <input type="hidden" , name="next" , value="{{request.GET.next}}">
+    {%endif%}
+</form>
+
+<form action="{% url 'accounts:signin' %}" method="post" class="form">
+    {%csrf_token%}
+
+    <a class="btn btn-lg btn-primary " href="{% url 'accounts:signin' %}">No account? Create One &raquo;</a>
+
+    {%if request.GET.next%}
+    <input type="hidden" , name="next" , value="{{request.GET.next}}">
+    {%endif%}
+</form>
+{%endblock content%}

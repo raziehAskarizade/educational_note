@@ -1,0 +1,34 @@
+{%extends 'mainpage/base.html'%}
+{% load bootstrap4 %}
+
+{% block title%} register {% endblock title%}
+
+
+{% block page_header%}
+<h2 style="color: #88a6ab;">Sign up to your account.</h2>
+{% endblock page_header%}
+
+{%block content%}
+<form action="{% url 'accounts:signin' %}" method="post" class="form">
+    {% csrf_token %}
+
+    <h3 style="color:Tomato;">{{error}}</h3>
+    <br>
+    Username
+    <input class="form-control form-control-sm" placeholder="Username" id="usr" type="text" name="username" id=""><br>
+    Email
+    <input class="form-control form-control-sm" placeholder="Email address" id="usr" type="email" name="email"
+        id=""><br>
+    Password
+    <input class="form-control form-control-sm" placeholder="Password" id="usr" type="password" minlength="8"
+        name="password" id=""><br>
+    Password Confirm
+    <input class="form-control form-control-sm" placeholder="password confirm" id="usr" type="password"
+        name="passwordconfirm" id=""><br>
+    <input class="btn btn-lg btn-primary" type="submit" value="Sign Up">
+
+    <!-- second way -->
+    <!-- {{form.as_p}}
+    <button type="submit">Sign Up</button> -->
+</form>
+{%endblock content%}
